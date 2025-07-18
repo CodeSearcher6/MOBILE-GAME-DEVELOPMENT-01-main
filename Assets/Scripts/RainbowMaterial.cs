@@ -7,6 +7,8 @@ public class RainbowMaterial : MonoBehaviour
     [SerializeField] private Color targetColor;
     [SerializeField] private float hue = 0f;
     
+    
+    
     public Renderer targetRenderer;
     public float transitionSpeed = 2f;
 
