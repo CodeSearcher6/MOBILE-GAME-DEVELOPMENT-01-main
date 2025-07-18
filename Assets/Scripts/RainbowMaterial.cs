@@ -3,12 +3,12 @@ using System.Collections;
 
 public class RainbowMaterial : MonoBehaviour
 {
+    [SerializeField] private Color currentColor;
+    [SerializeField] private Color targetColor;
+    [SerializeField] private float hue = 0f;
+    
     public Renderer targetRenderer;
     public float transitionSpeed = 2f;
-
-    private Color currentColor;
-    private Color targetColor;
-    private float hue = 0f;
 
     private void Start()
     {
@@ -17,9 +17,9 @@ public class RainbowMaterial : MonoBehaviour
             targetRenderer = GetComponent<Renderer>();
         }
 
-         currentColor = targetRenderer.material.color;
-         StartCoroutine(ColorTransition());
-        
+        currentColor = targetRenderer.material.color;
+        StartCoroutine(ColorTransition());
+
     }
 
     IEnumerator ColorTransition()

@@ -668,7 +668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1180397817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -770,6 +770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533efda841e78ee46b5696d6b999340f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  hue: 0
   targetRenderer: {fileID: 0}
   transitionSpeed: 2
 --- !u!1 &1633446488
