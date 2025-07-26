@@ -12,7 +12,7 @@ public class Kick_Collider : MonoBehaviour
         Debug.Log("Collision with: " + other.collider.name);
         
 
-        Rigidbody rb = other.collider.GetComponent<Rigidbody>();
+        Rigidbody rb = other.collider.attachedRigidbody;
 
         if (other.collider.CompareTag("Player") && rb != null)
         {
