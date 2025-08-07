@@ -15,6 +15,8 @@ namespace Game
         [SerializeField] private float _jumpForce = 5f;
         [SerializeField] private float _gravity = 9.8f;
         private float _verticalVelocity;
+        private const string IsRunning = "IsRunning";
+        private const string IsJumping = "IsJumping";
         private bool _isJumping;
         private const int LevelWidth = 4;
 
@@ -38,11 +40,12 @@ namespace Game
             _basicRunner.motion.offset = Vector2.MoveTowards(_basicRunner.motion.offset, target, Time.deltaTime * _offsetSpeed);
 
             bool isMoving = Mathf.Abs(_basicRunner.motion.offset.x) > 0.01f;
-            animator.SetBool("IsRunning", isMoving);
+            animator.SetBool(IsRunning, isMoving);
 
         }
         private void Awake()
         {
+            animator = GetComponent<Animator>();
             _targetVector = Vector2.up;
             _inputController = new();
             _inputController.SubscribeEvents();
@@ -77,10 +80,10 @@ namespace Game
         }
         private void OnJumpPerformed()
         {
-            if (_isJumping) return; 
+            if (_isJumping) return;
             _verticalVelocity = _jumpForce;
             _isJumping = true;
-            animator.SetTrigger("IsJumping");
+            animator.SetTrigger(IsJumping);
             Debug.Log("Jump triggered");
         }
 
