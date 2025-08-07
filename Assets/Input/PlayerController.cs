@@ -8,7 +8,6 @@ namespace Game
         private InputController _inputController;
         [SerializeField] private Runner _basicRunner; 
         [SerializeField] private float _joystickspeed = 2f; 
-        [SerializeField] private float _lerpSpeed = 5f;
         [SerializeField] private float _maxInputMagnitude = 3f;
         [SerializeField] private float _offsetLerpSpeed = 2f;
         
@@ -17,19 +16,12 @@ namespace Game
 
         private void Update()
         {
-           // Clamp input щоб обмежити чутливість
-           Vector2 clampedInput = Vector2.ClampMagnitude(_targetVector, _maxInputMagnitude);
+            Vector2 clampedInput = Vector2.ClampMagnitude(_targetVector, _maxInputMagnitude);
+            Vector2 target = new Vector2(clampedInput.x * _joystickspeed, _basicRunner.motion.offset.y);
 
-           // Розрахунок цілі, масштабованої за чутливістю
-           Vector2 target = new Vector2(clampedInput.x * _joystickspeed, _basicRunner.motion.offset.y);
-    
-           // Плавне оновлення offset
-           Vector2 current = _basicRunner.motion.offset;
-           _basicRunner.motion.offset = Vector2.Lerp(current, target, Time.deltaTime * _offsetLerpSpeed);
-        } 
+            _basicRunner.motion.offset = Vector2.MoveTowards( _basicRunner.motion.offset,target,Time.deltaTime * _offsetLerpSpeed);
 
-
-
+        }
         private void Awake()
         {
             _inputController = new();
