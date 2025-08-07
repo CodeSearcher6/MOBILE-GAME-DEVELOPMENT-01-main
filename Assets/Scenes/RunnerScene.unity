@@ -378,11 +378,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88897cd7ee979f5449ff927dbf3f6cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1104133600}
   _basicRunner: {fileID: 1104133593}
   _joystickspeed: 1
-  _lerpSpeed: 2.5
   _maxInputMagnitude: 2.5
-  _offsetLerpSpeed: 2.5
+  _offsetSpeed: 2
+  _targetVector: {x: 0, y: 0}
+  _jumpForce: 5
+  _gravity: 9.8
+--- !u!95 &1104133600 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2350627648070736009, guid: bd76b6a73254c6e4bac482ab0b8d87de, type: 3}
+  m_PrefabInstance: {fileID: 1550699842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1123938764
 GameObject:
   m_ObjectHideFlags: 0

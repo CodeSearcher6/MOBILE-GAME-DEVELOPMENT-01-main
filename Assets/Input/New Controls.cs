@@ -11,6 +11,7 @@ public class InputController: IDisposable
     public InputControls InputActions => _InputActions;
 
     private IDisposable _eventListener;
+    public event Action JumpPerformed;
     public event Action<Vector2> MovementRecieved;  
     public event Action MovementEnded;
     public event Action EscapeButtonPressed;  
@@ -31,6 +32,8 @@ public class InputController: IDisposable
         _InputActions.Default.Movement.performed += OnMovementPerformed;
         _InputActions.Default.ExitButton.performed += OnEscapePerformed;
         _InputActions.Default.Movement.canceled += OnMovementEnded;
+        _InputActions.Default.Jump.performed += OnJumpPerformed;
+
     }
 
     public void UnsubscribeEvents()
@@ -38,11 +41,12 @@ public class InputController: IDisposable
         _InputActions.Default.Movement.performed -= OnMovementPerformed;
         _InputActions.Default.ExitButton.performed -= OnEscapePerformed;
         _InputActions.Default.Movement.canceled -= OnMovementEnded;
-    }
+        _InputActions.Default.Jump.performed -= OnJumpPerformed;
 
+    }
+    private void OnJumpPerformed(InputAction.CallbackContext context) => JumpPerformed?.Invoke();
     private void OnMovementPerformed(InputAction.CallbackContext callbackContext) => MovementRecieved?.Invoke(callbackContext.ReadValue<Vector2>());
     private void OnMovementEnded(InputAction.CallbackContext callbackContext) => MovementEnded?.Invoke();
-
     private void OnEscapePerformed(InputAction.CallbackContext callbackContext) => EscapeButtonPressed?.Invoke();
 
 

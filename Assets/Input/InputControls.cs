@@ -25,12 +25,12 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     ""maps"": [
         {
             ""name"": ""Default"",
-            ""id"": ""16d92e4d-5bc4-4087-806e-0dbd4e477c8b"",
+            ""id"": ""8dcf27bd-cee8-41f2-8b99-d2b538d43d6c"",
             ""actions"": [
                 {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
-                    ""id"": ""0003a072-eada-403c-8020-4c780d48f79d"",
+                    ""id"": ""028d7542-5a4c-4c18-921d-cf738e5d36dc"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -39,7 +39,16 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""ExitButton"",
                     ""type"": ""Button"",
-                    ""id"": ""f8d4c797-f6e5-4fa5-b9f5-8dd6b2e69d03"",
+                    ""id"": ""9830fc9f-dd62-40d7-a480-3fabd63b41a8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc78bbb7-6002-4aa6-9f9f-60bf1c133755"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -49,7 +58,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""57f13f6c-eda5-4e45-8939-023dfffa6009"",
+                    ""id"": ""d633d189-73d8-48e4-8ed1-01930a022352"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -60,7 +69,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""ebab92ac-d572-4a6b-8845-16a0947dc100"",
+                    ""id"": ""150f0ee9-d1fb-498c-98c8-855af79b198c"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -71,7 +80,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""f6bf58ca-a72a-4377-b7d1-48628c7f655f"",
+                    ""id"": ""e1d29e80-b221-40ea-ad28-cae20dd68ff2"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -82,7 +91,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""a9ea341e-ee05-42dc-a4de-77243784d1af"",
+                    ""id"": ""a741df2f-fdee-43d6-b64b-ffea47f6ee1c"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -93,7 +102,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""e50ecc3c-6dc7-4c90-b3ad-0636dbc698fc"",
+                    ""id"": ""586d93db-45e5-45d1-922e-3096784696d0"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -104,7 +113,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""09cbf150-57dd-4ad1-a4e2-b1d8ff78832f"",
+                    ""id"": ""a1e01518-b8ce-489f-8f01-3f26495a6d5b"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -115,7 +124,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1d7a296d-788b-4edc-9bee-4e8a775130c0"",
+                    ""id"": ""f64e2e23-a3ea-47c2-8723-0e5db6ff43b2"",
                     ""path"": ""<XInputController>/start"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -126,12 +135,34 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3a477f03-5b8f-4af7-9a65-9361a58722e5"",
+                    ""id"": ""dbe909ba-4cee-483e-baaa-9c7a1a507e22"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ExitButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bfb0640-1bfa-4332-a7cf-13fd0bc52ea1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""083d55ed-363c-4d57-ba8a-b91938fb7dd3"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -144,6 +175,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Movement = m_Default.FindAction("Movement", throwIfNotFound: true);
         m_Default_ExitButton = m_Default.FindAction("ExitButton", throwIfNotFound: true);
+        m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
     }
 
     ~@InputControls()
@@ -212,12 +244,14 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
     private readonly InputAction m_Default_Movement;
     private readonly InputAction m_Default_ExitButton;
+    private readonly InputAction m_Default_Jump;
     public struct DefaultActions
     {
         private @InputControls m_Wrapper;
         public DefaultActions(@InputControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Default_Movement;
         public InputAction @ExitButton => m_Wrapper.m_Default_ExitButton;
+        public InputAction @Jump => m_Wrapper.m_Default_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +267,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @ExitButton.started += instance.OnExitButton;
             @ExitButton.performed += instance.OnExitButton;
             @ExitButton.canceled += instance.OnExitButton;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -243,6 +280,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @ExitButton.started -= instance.OnExitButton;
             @ExitButton.performed -= instance.OnExitButton;
             @ExitButton.canceled -= instance.OnExitButton;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -264,5 +304,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnExitButton(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
