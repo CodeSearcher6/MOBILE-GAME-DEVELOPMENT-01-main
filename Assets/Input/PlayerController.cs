@@ -6,26 +6,24 @@ namespace Game
 {
     public class PlayerController : MonoBehaviour
     {
-        private InputController _inputController;
         [SerializeField] private Animator animator;
         [SerializeField] private Runner _basicRunner;
         [SerializeField] private float _joystickspeed = 2f;
         [SerializeField] private float _maxInputMagnitude = 3f;
         [SerializeField] private float _offsetSpeed = 2f;
         [SerializeField] private float _jumpForce = 5f;
-        [SerializeField] private float _gravity = 9.8f;
+        [SerializeField] private float _gravity = -9.81f;
         [SerializeField] private Vector2 _targetVector;
-
-        private float _verticalVelocity;
+        private InputController _inputController;
+        private AnimationManager _animationManager;
         private bool _isJumping;
+        private float _verticalVelocity;
         private const int LevelWidth = 4;
-
-        private enum AnimationState { Idle, Running, Jumping }
-        private AnimationState _currentState;
-
+        private const float MovementThreshold = 0.01f;
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            _animationManager = new AnimationManager(animator);
             _targetVector = Vector2.up;
             _inputController = new();
             _inputController.SubscribeEvents();
@@ -35,60 +33,67 @@ namespace Game
         private void Update()
         {
             HandleMovement();
-            HandleAnimationState();
+            UpdateJump();
         }
+        private void UpdateJump()
+        {
+            if (_isJumping)
+            {
+                _verticalVelocity += _gravity * Time.deltaTime;
 
+                Vector2 currentOffset = _basicRunner.motion.offset;
+                currentOffset.y += _verticalVelocity * Time.deltaTime;
+                _basicRunner.motion.offset = currentOffset;
+
+                // Перевірка приземлення
+                if (_basicRunner.motion.offset.y <= 0f)
+                {
+                    _basicRunner.motion.offset = new Vector2(currentOffset.x, 0f);
+                    _verticalVelocity = 0f;
+                    _isJumping = false;
+
+                    bool isRunning = Mathf.Abs(_basicRunner.motion.offset.x) > MovementThreshold;
+                    _animationManager.SetRunning(isRunning);
+                }
+            }
+        }
         private void HandleMovement()
         {
             Vector2 clampedInput = Vector2.ClampMagnitude(_targetVector, _maxInputMagnitude);
             Vector2 target = new Vector2(clampedInput.x * _joystickspeed, _basicRunner.motion.offset.y);
-
-            if (_isJumping)
-            {
-                _verticalVelocity -= _gravity * Time.deltaTime;
-                target.y += _verticalVelocity * Time.deltaTime;
-
-                if (target.y <= 0f)
-                {
-                    target.y = 0f;
-                    _verticalVelocity = 0f;
-                    _isJumping = false;
-                }
-            }
-
+            bool isRunning = Mathf.Abs(_basicRunner.motion.offset.x) > MovementThreshold;
+            _animationManager.SetRunning(isRunning);
             _basicRunner.motion.offset = Vector2.MoveTowards(_basicRunner.motion.offset, target, Time.deltaTime * _offsetSpeed);
         }
 
-        private void HandleAnimationState()
+        public class AnimationManager
         {
-            bool isMoving = Mathf.Abs(_basicRunner.motion.offset.x) > 0.01f;
+            private readonly Animator _animator;
+            private bool _isRunning;
 
-            if (_isJumping)
+            [SerializeField] private string isRunningParam = "IsRunning";
+            [SerializeField] private string jumpTrigger = "IsJumping";
+
+            public bool IsRunning => _isRunning;
+
+            public AnimationManager(Animator animator)
             {
-                SetAnimationState(AnimationState.Jumping);
+                _animator = animator;
             }
-            else if (isMoving)
+
+            public void SetRunning(bool running)
             {
-                SetAnimationState(AnimationState.Running);
+                if (_isRunning == running) return;
+                _animator.SetBool(isRunningParam, running);
+                _isRunning = running;
+            }
+
+            public void TriggerJump()
+            {
+                _animator.SetTrigger(jumpTrigger);
             }
         }
 
-        private void SetAnimationState(AnimationState newState)
-        {
-            if (newState == _currentState) return;
-
-            switch (newState)
-            {
-                case AnimationState.Running:
-                    animator.Play("Run");
-                    break;
-                case AnimationState.Jumping:
-                    animator.Play("Jump");
-                    break;
-            }
-
-            _currentState = newState;
-        }
 
         public void SubscribeEvents()
         {
@@ -122,9 +127,10 @@ namespace Game
 
             _verticalVelocity = _jumpForce;
             _isJumping = true;
-            SetAnimationState(AnimationState.Jumping);
+            _animationManager.TriggerJump();
             Debug.Log("Jump triggered");
         }
+
 
         private void OnEscapeButtonPressed()
         {
