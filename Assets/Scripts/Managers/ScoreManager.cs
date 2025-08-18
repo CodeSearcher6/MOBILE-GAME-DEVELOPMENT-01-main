@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI scoreText;
-
+    
     private int score = 0;
     private Dictionary<SimpleCollectibleScript.CollectibleTypes, int> scoreValues = new()
     {
