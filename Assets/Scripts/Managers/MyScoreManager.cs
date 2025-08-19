@@ -1,24 +1,25 @@
 using UnityEngine;
+using Game.Models;
 using System.Collections.Generic;
 using TMPro;
 
-public enum CollectibleTypes { Type1, Gem, Star }
-
-
-public class ScoreManager : MonoBehaviour
+public class MyScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
+    public static MyScoreManager Instance;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    
+
     private int score = 0;
-    private Dictionary<SimpleCollectibleScript.CollectibleTypes, int> scoreValues = new()
+
+    private Dictionary<CollectibleTypes, int> scoreValues = new()
     {
-        { SimpleCollectibleScript.CollectibleTypes.Type1, 1 },
+        { CollectibleTypes.Coin, 1 },
+        { CollectibleTypes.Gem, 5 },
+        { CollectibleTypes.Star, 10 }
     };
 
-    private void HandleCollectible(SimpleCollectibleScript collectible)
+    public void HandleCollectible(MyCollectibleScript collectible)
     {
         if (scoreValues.TryGetValue(collectible.CollectibleType, out int value))
         {
@@ -37,16 +38,14 @@ public class ScoreManager : MonoBehaviour
 
         Debug.Log("Current Score: " + score);
     }
+
     private void OnEnable()
     {
-        SimpleCollectibleScript.OnCollected += HandleCollectible;
+        MyCollectibleScript.OnCollected += HandleCollectible;
     }
 
     private void OnDisable()
     {
-        SimpleCollectibleScript.OnCollected -= HandleCollectible;
+        MyCollectibleScript.OnCollected -= HandleCollectible;
     }
-
 }
-
-
