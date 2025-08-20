@@ -18,7 +18,17 @@ public class MyScoreManager : MonoBehaviour
         { CollectibleTypes.Gem, 5 },
         { CollectibleTypes.Star, 10 }
     };
-
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void HandleCollectible(MyCollectibleScript collectible)
     {
         if (scoreValues.TryGetValue(collectible.CollectibleType, out int value))
@@ -37,15 +47,5 @@ public class MyScoreManager : MonoBehaviour
             Debug.LogWarning("Score Text is not assigned!");
 
         Debug.Log("Current Score: " + score);
-    }
-
-    private void OnEnable()
-    {
-        MyCollectibleScript.OnCollected += HandleCollectible;
-    }
-
-    private void OnDisable()
-    {
-        MyCollectibleScript.OnCollected -= HandleCollectible;
     }
 }
