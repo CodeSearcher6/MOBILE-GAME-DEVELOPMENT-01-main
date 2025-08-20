@@ -3,14 +3,18 @@ using Game.Models;
 using System.Collections.Generic;
 using TMPro;
 
+
 public class MyScoreManager : MonoBehaviour
 {
     public static MyScoreManager Instance;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
 
     private int score = 0;
+    private int highScore = 0;
+
 
     private Dictionary<CollectibleTypes, int> scoreValues = new()
     {
@@ -28,6 +32,9 @@ public class MyScoreManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        highScore = SaveManager.LoadHighScore();
+        Debug.Log("Loaded High Score: " + highScore);
     }
     public void HandleCollectible(MyCollectibleScript collectible)
     {
@@ -47,5 +54,13 @@ public class MyScoreManager : MonoBehaviour
             Debug.LogWarning("Score Text is not assigned!");
 
         Debug.Log("Current Score: " + score);
+        Debug.Log($"HighScore: {highScore}");
+
+        if (score > highScore)
+        {
+            highScore = score;
+            SaveManager.SaveHighScore(highScore);
+            Debug.Log("New High Score saved: " + highScore);
+        }
     }
 }
