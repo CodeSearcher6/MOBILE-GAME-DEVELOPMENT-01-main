@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float joystickSpeed = 2f;
     [SerializeField] private float maxInputMagnitude = 3f;
     [SerializeField] private float offsetSpeed = 2f;
+    [SerializeField] private float smoothFactor = 2f;
+    [SerializeField] private float edgeFalloff = 2f;
+
+
+
+
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
@@ -29,7 +35,7 @@ public class PlayerController : MonoBehaviour
         inputController = new();
         inputController.SubscribeEvents();
 
-        movementManager = new PlayerMovementManager(runner, joystickSpeed, offsetSpeed, maxInputMagnitude);
+        movementManager = new PlayerMovementManager(runner, joystickSpeed, offsetSpeed, maxInputMagnitude,smoothFactor, edgeFalloff);
         jumpManager = new PlayerJumpManager(runner, gravity, jumpForce);
         animationManager = new PlayerAnimationManager(animator, animationManagerSO);
 
