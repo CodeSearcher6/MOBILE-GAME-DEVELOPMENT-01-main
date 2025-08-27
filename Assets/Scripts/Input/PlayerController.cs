@@ -16,10 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float smoothFactor = 2f;
     [SerializeField] private float edgeFalloff = 2f;
 
-
-
-
-
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -9.81f;

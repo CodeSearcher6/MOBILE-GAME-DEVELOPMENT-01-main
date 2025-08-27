@@ -23,8 +23,7 @@ public class PlayerMovementManager
     public void Move(Vector2 input)
     {
         Vector2 clampedInput = Vector2.ClampMagnitude(input, _maxInputMagnitude);
-
-        // Нелінійна чутливість
+        
         float sensitivity = Mathf.Pow(Mathf.Abs(clampedInput.x), 1.5f);
         float targetX = Mathf.Sign(clampedInput.x) * sensitivity * _joystickSpeed;
 
