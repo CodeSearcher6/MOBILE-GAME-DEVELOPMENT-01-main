@@ -36,14 +36,7 @@ public class MyScoreManager : MonoBehaviour
         highScore = SaveManager.LoadHighScore();
         Debug.Log("Loaded High Score: " + highScore);
     }
-    public void HandleCollectible(MyCollectibleScript collectible)
-    {
-        if (scoreValues.TryGetValue(collectible.CollectibleType, out int value))
-        {
-            AddScore(value);
-        }
-    }
-
+    
     public void AddScore(int amount)
     {
         score += amount;
