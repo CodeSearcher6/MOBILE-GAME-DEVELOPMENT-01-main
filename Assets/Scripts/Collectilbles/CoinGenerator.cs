@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Game.Models;
+using VContainer;
 
 public class CoinGenerator : MonoBehaviour
 {
@@ -14,7 +15,13 @@ public class CoinGenerator : MonoBehaviour
     [SerializeField] public float maxZDistance = 10f; // макс відстань по Z
 
     private float lastZ = 0f; // остання Z-позиція
+    private IScoreService scoreService;
 
+    [Inject]
+    public void Construct(IScoreService scoreService)
+    {
+        this.scoreService = scoreService;
+    }
     void Start()
     {
         StartCoroutine(SpawnRoutine());
@@ -67,8 +74,7 @@ public class CoinGenerator : MonoBehaviour
             if (obj.GetComponent<CollectableRotation>() == null)
                 obj.gameObject.AddComponent<CollectableRotation>();
         }
-
-        obj.Init(data); 
+        obj.Init(data, scoreService);
     }
 
 }

@@ -271,6 +271,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.hadashikick.vcontainer": {
+      "version": "file:D:/downloads/VContainer-master/VContainer-master/VContainer/Assets/VContainer",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
