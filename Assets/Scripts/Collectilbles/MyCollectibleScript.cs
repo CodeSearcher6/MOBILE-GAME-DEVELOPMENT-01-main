@@ -17,8 +17,8 @@ public class MyCollectibleScript : MonoBehaviour
     {
         if (other.CompareTag(PLAYER_TAG))
         {
-            if (data.feedbacks != null)
-                data.feedbacks.PlayFeedbacks(transform.position);
+            if (data.collectFeedback != null)
+                data.collectFeedback.PlayFeedbacks(transform.position);
 
             Collect();
         }
@@ -26,12 +26,12 @@ public class MyCollectibleScript : MonoBehaviour
 
     private void Collect()
     {
-        Debug.Log($"Picked up {data.type}, +{data.value} points");
+        Debug.Log($"Picked up {data.Type}, +{data.Value} points");
         AudioManager.PlaySound(AudioLibrarySounds.CollectilbleSFX);
-        MyScoreManager.Instance.AddScore(data.value);
+        MyScoreManager.Instance.AddScore(data.Value);
 
-        if (data.collectEffect != null)
-            Instantiate(data.collectEffect, transform.position, Quaternion.identity);
+        if (data.CollectEffect != null)
+            Instantiate(data.CollectEffect, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

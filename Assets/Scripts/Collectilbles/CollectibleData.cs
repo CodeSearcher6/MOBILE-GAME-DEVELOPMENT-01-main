@@ -2,14 +2,23 @@ using UnityEngine;
 using Game.Models;
 using MoreMountains.Feedbacks;
 
-
 [CreateAssetMenu(fileName = "CollectibleData", menuName = "Runner/Collectible")]
 public class CollectibleData : ScriptableObject
 {
-    public CollectibleTypes type;
-    public Sprite icon;
-    public int value;
-    public GameObject prefab;
-    public MMF_Player feedbacks;
-    public GameObject collectEffect;
+    [SerializeField] private CollectibleTypes type;
+    public CollectibleTypes Type => type;
+
+    [SerializeField] private Sprite icon;
+    public Sprite Icon => icon;
+    [SerializeField] private GameObject Prefab;
+    public MyCollectibleScript CollectiblePrefab => Prefab != null ? Prefab.GetComponent<MyCollectibleScript>() : null;
+
+    [SerializeField] private int value = 10;
+    public int Value => value;
+
+    [SerializeField] public MMFeedbacks collectFeedback;
+
+    [SerializeField] private GameObject collectEffect;
+    public GameObject CollectEffect => collectEffect;
+
 }

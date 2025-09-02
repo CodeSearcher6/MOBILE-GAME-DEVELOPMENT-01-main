@@ -60,18 +60,16 @@ public class CoinGenerator : MonoBehaviour
         if (collectibleTypes.Length == 0) return;
 
         var data = collectibleTypes[Random.Range(0, collectibleTypes.Length)];
-        GameObject obj = Instantiate(data.prefab, position, Quaternion.identity);
+        MyCollectibleScript obj = Instantiate(data.CollectiblePrefab, position, Quaternion.identity);
 
-        if (data.type == CollectibleTypes.Coin)
+        if (data.Type == CollectibleTypes.Coin)
         {
             if (obj.GetComponent<CollectableRotation>() == null)
-                obj.AddComponent<CollectableRotation>();
+                obj.gameObject.AddComponent<CollectableRotation>();
         }
-        var script = obj.GetComponent<MyCollectibleScript>();
-        if (script != null)
-        {
-            script.Init(data);
-        }
+
+        obj.Init(data); 
     }
+
 }
 
