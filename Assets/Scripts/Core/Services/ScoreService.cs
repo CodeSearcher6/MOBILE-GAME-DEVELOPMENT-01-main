@@ -16,7 +16,7 @@ public class ScoreService : IScoreService
     private readonly Dictionary<CollectibleTypes, int> scoreValues = new()
     {
         { CollectibleTypes.Coin, 1 },
-        { CollectibleTypes.Gem, 5 },
+        { CollectibleTypes.Gem, 50 },
         { CollectibleTypes.Star, 10 }
     };
 

@@ -15,8 +15,9 @@ public class CollectibleData : ScriptableObject
 
     [SerializeField] private int value = 10;
     public int Value => value;
-
-    [SerializeField] public MMFeedbacks collectFeedback;
+    [SerializeField] public MMF_Player collectFeedback;
+    public MMF_Player CollectFeedback => collectFeedback;
+    
     [SerializeField] private GameObject collectEffect;
     public GameObject CollectEffect => collectEffect;
 

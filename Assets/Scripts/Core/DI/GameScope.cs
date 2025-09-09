@@ -7,5 +7,6 @@ public class GameScope : LifetimeScope
     {
         builder.Register<ScoreService>(Lifetime.Singleton).As<IScoreService>();
         builder.RegisterEntryPoint<CoinGenerator>();
+        builder.RegisterComponentInHierarchy<CollectibleFeedbackManager>();
     }
 }

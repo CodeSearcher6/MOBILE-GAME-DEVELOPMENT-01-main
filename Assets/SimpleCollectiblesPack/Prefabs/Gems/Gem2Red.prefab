@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4734364914070202}
   - component: {fileID: 33720063556294858}
   - component: {fileID: 23704772807830858}
-  - component: {fileID: 114740300400230638}
   - component: {fileID: 82546618261653156}
   - component: {fileID: 135130672063084954}
   m_Layer: 0
@@ -89,23 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &114740300400230638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466594571464756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1315172d7ad53634e952f7d8f3c02048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollectibleType: 0
-  rotate: 1
-  rotationSpeed: 10
-  collectSound: {fileID: 0}
-  collectEffect: {fileID: 1702657300312902, guid: a45c51da10cf1a84abc6a99c06951e3f, type: 3}
 --- !u!82 &82546618261653156
 AudioSource:
   m_ObjectHideFlags: 0

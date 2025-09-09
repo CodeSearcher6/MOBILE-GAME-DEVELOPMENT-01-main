@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 33085848314403640}
   - component: {fileID: 23149943011687542}
   - component: {fileID: 82438506015820482}
-  - component: {fileID: 114510845023260786}
   - component: {fileID: 135105148080420062}
   m_Layer: 2
   m_Name: Shield
@@ -186,23 +185,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114510845023260786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844328801433658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1315172d7ad53634e952f7d8f3c02048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollectibleType: 0
-  rotate: 1
-  rotationSpeed: 10
-  collectSound: {fileID: 0}
-  collectEffect: {fileID: 1702657300312902, guid: a45c51da10cf1a84abc6a99c06951e3f, type: 3}
 --- !u!135 &135105148080420062
 SphereCollider:
   m_ObjectHideFlags: 0
