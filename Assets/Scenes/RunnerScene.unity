@@ -808,8 +808,8 @@ MonoBehaviour:
   maxXDistance: 1
   minZDistance: 5
   maxZDistance: 10
-  starChance: 0.1
-  gemChance: 0.05
+  gemChance: 5
+  starChance: 10
 --- !u!4 &331086347
 Transform:
   m_ObjectHideFlags: 0
