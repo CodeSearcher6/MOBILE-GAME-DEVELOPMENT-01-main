@@ -89,13 +89,6 @@ public class CoinGenerator : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3(0, 0.45f, z); // по центру
         SpawnCollectible(spawnPos, type);
-        
-        if (type == null)
-        {
-            Debug.LogError($"[SpawnSystem] Missing prefab for {type}");
-            return;
-        }
-
     }
 
     private void SpawnCollectible(Vector3 position, CollectibleTypes forcedType = CollectibleTypes.Coin)

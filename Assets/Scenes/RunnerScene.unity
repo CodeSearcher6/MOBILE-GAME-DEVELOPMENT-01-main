@@ -233,10 +233,10 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294967295
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2175,14 +2175,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88897cd7ee979f5449ff927dbf3f6cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runner: {fileID: 1104133593}
   animator: {fileID: 1104133600}
-  _basicRunner: {fileID: 1104133593}
-  _joystickspeed: 2
-  _maxInputMagnitude: 3
-  _offsetSpeed: 2
-  _jumpForce: 5
-  _gravity: -9.81
-  _targetVector: {x: 0, y: 0}
+  animationSO: {fileID: 11400000, guid: 04cb58ca468976048a91978fa373d8c3, type: 2}
+  joystickSpeed: 10
+  smoothFactor: 10
+  maxOffset: 5
+  jumpForce: 5
+  gravity: -9.81
 --- !u!95 &1104133600 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2350627648070736009, guid: bd76b6a73254c6e4bac482ab0b8d87de, type: 3}

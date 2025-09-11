@@ -13,9 +13,16 @@ namespace Game.Animation
             _animationSO = animationSO;
         }
 
-        public void TriggerJump()
+        public void StartJump()
         {
-            _animationSO.TriggerJump(_animator);
+            _animationSO.SetJumping(_animator, true);
+            _animationSO.SetRunning(_animator, ref _isRunning, false);
+        }
+
+        public void EndJump()
+        {
+            _animationSO.SetJumping(_animator, false);
+            _animationSO.SetRunning(_animator, ref _isRunning, true);
         }
 
         public void UpdateRunning(bool isRunningNow)
