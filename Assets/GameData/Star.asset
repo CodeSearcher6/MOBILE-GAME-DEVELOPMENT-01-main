@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25ea44b5cfa16d6408767d4f475e46e4, type: 3}
-  m_Name: Gem
+  m_Name: Star
   m_EditorClassIdentifier: 
-  type: 1
-  icon: {fileID: 5524590292671962877, guid: f7043b7291f49844b9671b3d3dedcbb5, type: 3}
-  prefab: {fileID: 7831794134547580112, guid: 32923e0a5e036d04fa9be7ef9cc548e4, type: 3}
-  value: 50
+  type: 2
+  icon: {fileID: 21300048, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  prefab: {fileID: 815495637268737058, guid: 409010852d1134147862865a8889b834, type: 3}
+  value: 10
   collectFeedback: {fileID: 0}
-  collectEffect: {fileID: 1702657300312902, guid: a45c51da10cf1a84abc6a99c06951e3f, type: 3}
+  collectEffect: {fileID: 1702657300312902, guid: 14217f5b36509d14f9dc3c9f3f3c93d7, type: 3}

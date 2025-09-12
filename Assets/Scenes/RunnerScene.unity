@@ -797,19 +797,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc14bf0169b9bd548a1807577ad48ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectibleTypes:
+  collectiblePresets:
   - {fileID: 11400000, guid: ada638117a0e93147a70bb0daa9e743e, type: 2}
   - {fileID: 11400000, guid: 35c197bd9b027e64da5214dcbae8c0e6, type: 2}
   - {fileID: 11400000, guid: ab197a656f5d9244692620dd603e9cb3, type: 2}
-  spawnInterval: 2
-  minRow: 3
-  maxRow: 4
-  minXDistance: 0.7
-  maxXDistance: 1
-  minZDistance: 5
-  maxZDistance: 10
+  spawnDelay: 3
+  minCoinsInLine: 1
+  maxCoinsInLine: 5
+  laneSpacing: 1
+  coinSpacingZ: 1
+  minZOffset: 5
+  maxZOffset: 10
   gemChance: 5
   starChance: 10
+  useRandomLane: 1
+  fixedLane: 0
 --- !u!4 &331086347
 Transform:
   m_ObjectHideFlags: 0
@@ -2178,9 +2180,8 @@ MonoBehaviour:
   runner: {fileID: 1104133593}
   animator: {fileID: 1104133600}
   animationSO: {fileID: 11400000, guid: 04cb58ca468976048a91978fa373d8c3, type: 2}
-  joystickSpeed: 10
-  smoothFactor: 10
-  maxOffset: 5
+  laneChangeSpeed: 2.5
+  laneOffset: 2.2
   jumpForce: 5
   gravity: -9.81
 --- !u!95 &1104133600 stripped

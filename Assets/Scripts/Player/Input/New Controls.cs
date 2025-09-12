@@ -5,20 +5,26 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine;
 
-public class InputController: IDisposable
+public class InputController : IDisposable
 {
     private readonly InputControls _InputActions;
     public InputControls InputActions => _InputActions;
 
     private IDisposable _eventListener;
     public event Action JumpPerformed;
-    public event Action<Vector2> MovementRecieved;  
+    public event Action<Vector2> MovementRecieved;
     public event Action MovementEnded;
-    public event Action EscapeButtonPressed;  
+    public event Action EscapeButtonPressed;
     public void Dispose()
     {
         // Unsubscribe all events or clean up resources here
         MovementRecieved = null;
+    }
+    public void Update()
+    {
+        Vector2 input = _InputActions.Default.Movement.ReadValue<Vector2>();
+        //Debug.Log("Raw input from InputActions: " + input);
+        MovementRecieved?.Invoke(input);
     }
 
     public InputController()

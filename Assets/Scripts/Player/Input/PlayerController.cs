@@ -12,10 +12,11 @@ namespace Game
         [SerializeField] private AnimationManagerSO animationSO;
 
         [Header("Movement Settings")]
-        [SerializeField] private float joystickSpeed = 20f;
+        [SerializeField] private float laneChangeSpeed = 10f;
+        [SerializeField] private float laneOffset = 1f;
+        private bool laneChangedThisFrame = false;
+        private float previousInputX = 0f;
 
-        [SerializeField] private float smoothFactor = 10f;
-        [SerializeField] private float maxOffset = 5f;
 
         [Header("Jump Settings")]
         [SerializeField] private float jumpForce = 5f;
@@ -23,6 +24,8 @@ namespace Game
 
 
         private PlayerMovementManager movement;
+        private PlayerStrafeManager strafeManager;
+
         private PlayerAnimationManager playerAnimator;
         private InputController input;
 
@@ -31,10 +34,12 @@ namespace Game
         private void Awake()
         {
             movement = new PlayerMovementManager(
-             runner, joystickSpeed, maxOffset, jumpForce, gravity, smoothFactor
+             runner, laneOffset, laneChangeSpeed, jumpForce, gravity
           );
 
             playerAnimator = new PlayerAnimationManager(animator, animationSO);
+            strafeManager = new PlayerStrafeManager(animator);
+
 
             input = new InputController();
             input.SubscribeEvents();
@@ -48,8 +53,11 @@ namespace Game
 
         private void Update()
         {
-            movement.Move(currentInput);
+            input.Update();
+            laneChangedThisFrame = false;
+            movement.Move();
             playerAnimator.UpdateRunning(movement.IsRunning);
+            strafeManager.UpdateStrafe(currentInput);
 
             if (movement.IsJumping && !wasJumping)
             {
@@ -64,13 +72,25 @@ namespace Game
                 wasJumping = false;
                 Debug.Log("Jump ended");
             }
-        }
 
+        }
 
         private void OnMovementReceived(Vector2 dir)
         {
             currentInput = Vector2.ClampMagnitude(dir, 1f);
-            Debug.Log($"Movement input: {currentInput}");
+
+            if (laneChangedThisFrame) return;
+
+            if (dir.x < -0.5f && previousInputX >= -0.5f && movement.MoveLeft())
+            {
+                laneChangedThisFrame = true;
+            }
+            else if (dir.x > 0.5f && previousInputX <= 0.5f && movement.MoveRight())
+            {
+                laneChangedThisFrame = true;
+            }
+
+            previousInputX = dir.x;
         }
 
         private void OnMovementEnded() => currentInput = Vector2.zero;
