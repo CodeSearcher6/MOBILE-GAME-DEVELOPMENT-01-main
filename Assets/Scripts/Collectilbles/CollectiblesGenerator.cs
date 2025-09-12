@@ -12,8 +12,6 @@ public class CoinGenerator : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnDelay = 2f;
-    [SerializeField] private int minCoinsInLine = 3;
-    [SerializeField] private int maxCoinsInLine = 5;
     [SerializeField] private float coinSpacingZ = 1f;
     [SerializeField] private float minZOffset = 5f;
     [SerializeField] private float maxZOffset = 10f;
