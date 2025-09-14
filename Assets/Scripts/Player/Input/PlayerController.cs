@@ -10,6 +10,7 @@ namespace Game
         [SerializeField] private Runner runner;
         [SerializeField] private Animator animator;
         [SerializeField] private AnimationManagerSO animationSO;
+        [SerializeField] private PlayerHealth health;
 
         [Header("Movement Settings")]
         [SerializeField] private float laneChangeSpeed = 10f;
@@ -37,7 +38,12 @@ namespace Game
              runner, laneOffset, laneChangeSpeed, jumpForce, gravity
           );
 
+            var health = GetComponent<PlayerHealth>();
+            health.OnDied += () => enabled = false;
+            health.OnRevived += () => enabled = true;
+
             playerAnimator = new PlayerAnimationManager(animator, animationSO);
+            animationSO.Initialize(health, animator);
             strafeManager = new PlayerStrafeManager(animator);
 
 
@@ -47,6 +53,7 @@ namespace Game
             input.MovementRecieved += OnMovementReceived;
             input.MovementEnded += OnMovementEnded;
             input.JumpPerformed += OnJumpPerformed;
+
         }
 
         private bool wasJumping = false;

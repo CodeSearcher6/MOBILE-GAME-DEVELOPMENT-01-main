@@ -9291,7 +9291,7 @@ MonoBehaviour:
     min: {x: -8.007006, y: 0, z: -3.0805955}
     size: {x: 15.924007, y: 3.9436755, z: 8.062099}
   builders: []
-  unpacked: 1
+  unpacked: 0
   alwaysDraw: 0
   drawGeneratedSpline: 1
   drawGeneratedSamples: 1
@@ -9299,7 +9299,7 @@ MonoBehaviour:
   drawEntranceAndExit: 1
   drawBounds: 1
   drawCustomPaths: 1
-  editorChildCount: 119
+  editorChildCount: 120
 --- !u!1 &5349378241553162868
 GameObject:
   m_ObjectHideFlags: 0
@@ -12645,8 +12645,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0037589543, y: 0.012254148, z: 0.006133435}
-  m_Center: {x: -1.1641535e-10, y: -0.0061917673, z: 0.0030788362}
+  m_Size: {x: 0.0004581644, y: 0.012254121, z: 0.0061334344}
+  m_Center: {x: -0.000052925836, y: -0.006191754, z: 0.003078836}
 --- !u!4 &8264310116952937756 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4923567541867758, guid: 883cf758fdbaad44fbf987329131dbfb, type: 3}

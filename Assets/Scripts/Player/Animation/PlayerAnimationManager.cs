@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace Game.Animation
 {
     public class PlayerAnimationManager
@@ -13,20 +14,8 @@ namespace Game.Animation
             _animationSO = animationSO;
         }
 
-        public void StartJump()
-        {
-            _animationSO.SetJumping(_animator, true);
-        }
-
-        public void EndJump()
-        {
-            _animationSO.SetJumping(_animator, false);
-        }
-
-        public void UpdateRunning(bool isRunningNow)
-        {
-            _animationSO.SetRunning(_animator, ref _isRunning, isRunningNow);
-        }
-    }
+        public void StartJump() => _animationSO.SetJumping(_animator, true);
+        public void EndJump() => _animationSO.SetJumping(_animator, false);
+        public void UpdateRunning(bool isRunningNow) => _animationSO.SetRunning(_animator, ref _isRunning, isRunningNow);
+        public void SetFalling(bool falling) => _animationSO.SetFalling(_animator, falling);    }
 }
-

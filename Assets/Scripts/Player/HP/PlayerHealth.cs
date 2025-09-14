@@ -1,90 +1,67 @@
 using UnityEngine;
-using UnityEngine.UI;
-using MoreMountains.Feedbacks;
-using TMPro;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHP = 5;
+    [Header("HP Settings")]
+    public int maxHP = 3;
     public int currentHP;
 
-    public TextMeshProUGUI HPCountText;
-    public GameObject reviveScreen;
-    
-    public MMF_Player damageFeedback;
-    public Animator animator;
+    public event Action OnDamaged;
+    public event Action OnDied;
+    public event Action OnRevived;
 
     private bool isFalling = false;
     private bool isAlive = true;
 
-    void Start()
+    private void Start()
     {
-        UpdateUI();
+        currentHP = maxHP;
     }
 
-    public void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger entered with: " + other.name);
-
-        if (!isAlive || isFalling)
-        {
-            Debug.Log("Blocked by state: isAlive=" + isAlive + ", isFalling=" + isFalling);
-            return;
-        }
+        if (!isAlive || isFalling) return;
 
         if (other.CompareTag("Obstacle"))
         {
-            HandleCollision();
+            HandleDamage();
         }
     }
 
-
-    public void HandleCollision()
+    public void HandleDamage()
     {
-        Debug.Log("Player hit an obstacle!");
-        damageFeedback.PlayFeedbacks();
-
-        if (currentHP > 1)
+        OnDamaged?.Invoke();
+        if (isAlive)
         {
-            currentHP--;
-            UpdateUI();
-        }
-        else
-        {
-            StartFallSequence();
+            Death();
         }
     }
 
-    public void StartFallSequence()
+    private void Death()
     {
         isFalling = true;
         isAlive = false;
-        animator.SetBool("isFalling", true);
-        Invoke(nameof(ShowReviveScreen), 1.5f);
+        OnDied?.Invoke();
     }
 
-    public void ShowReviveScreen()
+    public void Revive()
     {
-        reviveScreen.SetActive(true);
+        if (currentHP > 0)
+        {
+            currentHP--; 
+            isAlive = true;
+            isFalling = false;
+            OnRevived?.Invoke();
+        }
+        else
+        {
+            // HP вже 0 — не можна ревайвити
+            OnDied?.Invoke(); 
+        }
     }
 
-    public void OnReviveButtonPressed()
-    {
-        Debug.Log("Revive button pressed");
-        currentHP = Mathf.Max(currentHP - 1, 0);
-        UpdateUI();
 
-        reviveScreen.SetActive(false);
-        isAlive = true;
-        isFalling = false;
-        animator.SetBool("isAlive", true);
-        animator.SetBool("isFalling", false);
-        animator.Play("Run");
 
-    }
-
-    public void UpdateUI()
-    {
-        HPCountText.text = $"HP: {currentHP}";
-    }
+    public int GetCurrentHP() => currentHP;
 }

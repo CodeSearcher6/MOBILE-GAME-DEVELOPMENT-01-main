@@ -1,15 +1,17 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class HPDisplay : MonoBehaviour
 {
     [Header("UI")]
-    public TextMeshProUGUI HPCountText;
 
     [Header("HP Settings")]
     public int maxHP = 5;
     public int currentHP;
+    [SerializeField] private PlayerHealth health;
+    [SerializeField] public TextMeshProUGUI HPCountText;
+    [SerializeField] public GameObject reviveScreen;
+
 
     void Start()
     {
@@ -17,13 +19,11 @@ public class HPDisplay : MonoBehaviour
         UpdateHPText();
     }
 
-    void Update()
+    private void Awake()
     {
-        // Для демонстрації: натисни клавішу H щоб втратити 1 HP
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(1);
-        }
+        health.OnDamaged += UpdateHPText;
+        health.OnDied += () => reviveScreen?.SetActive(true);
+        health.OnRevived += () => reviveScreen?.SetActive(true);
     }
 
     public void TakeDamage(int amount)

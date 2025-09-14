@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace Game.Animation
 {
     [CreateAssetMenu(fileName = "AnimationManagerSO", menuName = "Game/AnimationManager")]
@@ -6,6 +7,16 @@ namespace Game.Animation
     {
         [SerializeField] private string isRunningParam = "IsRunning";
         [SerializeField] private string isJumpingParam = "IsJumping";
+        [SerializeField] private string isFallingParam = "isFalling";
+
+
+
+        public void Initialize(PlayerHealth health, Animator animator)
+        {
+            health.OnDied += () => animator.SetBool("isFalling", true);
+            health.OnRevived += () => animator.Play("Run");
+        }
+
 
         public void SetRunning(Animator animator, ref bool currentState, bool running)
         {
@@ -24,5 +35,9 @@ namespace Game.Animation
             Debug.Log("Jumping state set to: " + jumping);
         }
 
+        public void SetFalling(Animator animator, bool falling)
+        {
+            animator.SetBool(isFallingParam, falling);
+        }
     }
 }
