@@ -35,17 +35,26 @@ namespace Game
         private void Awake()
         {
             movement = new PlayerMovementManager(
-             runner, laneOffset, laneChangeSpeed, jumpForce, gravity
-          );
+                runner, laneOffset, laneChangeSpeed, jumpForce, gravity
+            );
 
             var health = GetComponent<PlayerHealth>();
-            health.OnDied += () => enabled = false;
-            health.OnRevived += () => enabled = true;
+            health.OnDied += () =>
+            {
+                enabled = false;
+                playerAnimator.SetFalling(true);
+                playerAnimator.SetAlive(false);
+            };
+
+            health.OnRevived += () =>
+            {
+                enabled = true;
+                playerAnimator.SetFalling(false);
+                playerAnimator.SetAlive(true);
+            };
 
             playerAnimator = new PlayerAnimationManager(animator, animationSO);
-            animationSO.Initialize(health, animator);
             strafeManager = new PlayerStrafeManager(animator);
-
 
             input = new InputController();
             input.SubscribeEvents();
@@ -53,8 +62,8 @@ namespace Game
             input.MovementRecieved += OnMovementReceived;
             input.MovementEnded += OnMovementEnded;
             input.JumpPerformed += OnJumpPerformed;
-
         }
+
 
         private bool wasJumping = false;
 

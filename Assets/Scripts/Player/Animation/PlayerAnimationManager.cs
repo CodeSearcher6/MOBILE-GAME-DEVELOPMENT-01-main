@@ -14,8 +14,23 @@ namespace Game.Animation
             _animationSO = animationSO;
         }
 
-        public void StartJump() => _animationSO.SetJumping(_animator, true);
-        public void EndJump() => _animationSO.SetJumping(_animator, false);
-        public void UpdateRunning(bool isRunningNow) => _animationSO.SetRunning(_animator, ref _isRunning, isRunningNow);
-        public void SetFalling(bool falling) => _animationSO.SetFalling(_animator, falling);    }
+        public void StartJump() =>
+            _animator.SetBool(_animationSO.isJumpingParam, true);
+
+        public void EndJump() =>
+            _animator.SetBool(_animationSO.isJumpingParam, false);
+
+        public void UpdateRunning(bool isRunningNow)
+        {
+            if (_isRunning == isRunningNow) return;
+            _isRunning = isRunningNow;
+            _animator.SetBool(_animationSO.isRunningParam, isRunningNow);
+        }
+
+        public void SetFalling(bool falling) =>
+            _animator.SetBool(_animationSO.isFallingParam, falling);
+
+        public void SetAlive(bool alive) =>
+            _animator.SetBool(_animationSO.isAliveParam, alive);  
+    }
 }

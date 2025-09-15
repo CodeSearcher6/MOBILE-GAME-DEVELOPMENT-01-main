@@ -2,29 +2,46 @@ using UnityEngine;
 using Dreamteck.Forever;
 using MoreMountains.Feedbacks;
 using TMPro;
+using Game.Animation;
 
 public class PlayerHealthResponder : MonoBehaviour
 {
-    [Header("Visuals & Feedback")]
+    [Header("Dependencies")]
+    [SerializeField] private PlayerHealth health;
     [SerializeField] private Runner runner;
     [SerializeField] private Animator animator;
+    [SerializeField] private AnimationManagerSO animationSO;
+
+    [Header("Visuals & Feedback")]
     [SerializeField] private MMF_Player damageFeedback;
     [SerializeField] private GameObject reviveScreen;
     [SerializeField] private GameObject gameOverScreen;
 
     [SerializeField] private TextMeshProUGUI HPCountText;
 
-    private PlayerHealth health;
+    private PlayerAnimationManager _animationManager;
 
     private void Awake()
     {
-        health = GetComponent<PlayerHealth>();
+        _animationManager = new PlayerAnimationManager(animator, animationSO);
+    }
+
+    private void OnEnable()
+    {
+        if (health == null) return;
 
         health.OnDamaged += HandleDamage;
         health.OnDied += HandleDeath;
         health.OnRevived += HandleRevive;
+    }
 
-        UpdateUI();
+    private void OnDisable()
+    {
+        if (health == null) return;
+
+        health.OnDamaged -= HandleDamage;
+        health.OnDied -= HandleDeath;
+        health.OnRevived -= HandleRevive;
     }
 
     private void HandleDamage()
@@ -39,27 +56,26 @@ public class PlayerHealthResponder : MonoBehaviour
     {
         if (health.GetCurrentHP() <= 0)
         {
-            ShowGameOverScreen(); // HP вже 0 — кінець
+            ShowGameOverScreen();
             reviveScreen?.SetActive(false);
-
         }
 
         runner.enabled = false;
-        animator.SetBool("isFalling", true);
-        animator.SetBool("isAlive", false);
+        _animationManager.SetFalling(true);
+        _animationManager.SetAlive(false);   
         UpdateUI();
     }
-
 
     private void HandleRevive()
     {
         reviveScreen?.SetActive(false);
         runner.enabled = true;
 
-        animator.SetBool("isFalling", false);
-        animator.SetBool("isAlive", true);
+        _animationManager.SetFalling(false);
+        _animationManager.SetAlive(true);    
         UpdateUI();
     }
+
     private void ShowGameOverScreen()
     {
         if (gameOverScreen != null)
